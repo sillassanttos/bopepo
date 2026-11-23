@@ -40,8 +40,16 @@
   - O teste `TestCLBancoobCobrancaNaoRegistrada.seNaoPermiteNossoNumeroComTamanhoDiferenteDe7` falhava cerca de 1 vez
     em 10. O gerador de nosso número aleatório não completava com zeros. Corrigido.
 - [x] Boleto de exemplo do BB com vencimento em 15/12/2026: fator 1661, correto. Prova em `local\validacao\`.
-- [ ] iText 5 (AGPL) → OpenPDF.
-- [ ] Versões fixas (log4j com faixa aberta), JAXB → Jakarta.
+- [x] iText 5 (AGPL) → **OpenPDF 1.4.2** (23/11/2026, branch `openpdf`).
+  - A linha 2.x do OpenPDF exige Java 21; a 1.4.x mantém o Java 11.
+  - Diferenças de API isoladas em `PDFUtil.posicoesDoCampo`: `getFieldPositions` devolve `float[]` em grupos de 5.
+  - Bookmarks: `getBookmarkList`/`shiftPageNumbersInRange`. Info do documento: `setInfoDictionary`.
+  - O auxiliar de testes `excludes/PDFs` foi reescrito com `PdfContentParser`. Os 3 testes de imagem, desligados
+    desde o iText 5, voltaram e passam (logo e código de barras idênticos pixel a pixel).
+  - Resultado: **720 testes, 0 falhas, 6 ignorados**.
+- [x] Versões fixas: log4j 2.26.1 (era a faixa `[2.0.0,2.100)`), guava 33.8.0, commons-io 2.22.0, junit 4.13.2;
+  compilador 3.14.0 com `release 11`.
+- [ ] JAXB `javax` → `jakarta` (afeta o pacote `texgit`; deixado para uma etapa própria).
 - [ ] Banco Inter: campo livre, CNAB 400 e cliente da API Cobrança v3.
 - [ ] QR Code Pix (Bolepix) no PDF.
 - [ ] CI no GitHub Actions.

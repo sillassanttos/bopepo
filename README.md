@@ -9,6 +9,7 @@ com os seguintes objetivos:
 
 - Unificado das bibliotecas do projeto JRimum (concluído)
 - Atualizar dependências: Java 11 e itextpdf5 (concluído)
+- Trocar o iText 5 (AGPL) pelo OpenPDF 1.4 (LGPL/MPL), que mantém o Java 11 (concluído no fork sillassanttos/bopepo)
 - Refatorar pacotes reduzindo a quantidade em unidades maiores e coesas (concluído)
 - Biblioteca pra gerar boletos, arquivos de remessa e retorno  (concluído)
 - Façade para facilitar o uso da biblioteca (concluído)
