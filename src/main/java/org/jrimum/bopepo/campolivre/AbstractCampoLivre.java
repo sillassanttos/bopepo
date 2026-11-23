@@ -223,8 +223,8 @@ abstract class AbstractCampoLivre extends BlockOfFields implements CampoLivre {
                         return AbstractCLBancoRural.create(titulo);
                     case BANCO_SANTANDER:
                         return AbstractCLSantander.create(titulo);
-                    case BANCO_INTEMEDIUM:
-                        return AbstractCLBancoIntermedium.create(titulo);
+                    case BANCO_INTER:
+                        return AbstractCLBancoInter.create(titulo);
                     case BANCO_SICREDI:
                         return AbstractCLSicredi.create(titulo);
                     case BANCOOB:

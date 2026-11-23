@@ -165,15 +165,13 @@ public enum BancosSuportados {
      */
     BANCO_DE_BRASILIA("070", "00000208000100", "BRB- Banco de Brasília S.A.", "Banco Múltiplo"),
     /**
-     * Tipo enumerado que representa o BANISA, Banco
-     * <strong>Intermedium</strong>, código de compensação
-     * <strong>077</strong>
-     * <a href="http://www.bancointermedium.com.br/">
-     * site</a>.
+     * Tipo enumerado que representa o <strong>Banco Inter</strong> (antigo
+     * Banco Intermedium), código de compensação <strong>077</strong>
+     * <a href="https://inter.co/">site</a>.
      *
-     * @since 0.2
+     * @since 2.0.2
      */
-    BANCO_INTEMEDIUM("077", "00416968000101", "BANCO INTERMEDIUM S.A.", "Banco Múltiplo"),
+    BANCO_INTER("077", "00416968000101", "BANCO INTER S.A.", "Banco Múltiplo"),
     /**
      * Tipo enumerado que representa o CECRED, <strong>Cooperativa Central de
      * Crédito Urbano</strong>, código de compensação
@@ -309,7 +307,16 @@ public enum BancosSuportados {
      * @since 0.2
      */
     BANCOOB("756", "02038232000164", "BANCO COOPERATIVO DO BRASIL S.A. - BANCOOB", "Banco Comercial Cooperativo");
-    
+
+    /**
+     * Nome antigo do {@link #BANCO_INTER}, mantido para não quebrar o código de
+     * quem já usava a constante.
+     *
+     * @deprecated use {@link #BANCO_INTER}.
+     */
+    @Deprecated
+    public static final BancosSuportados BANCO_INTEMEDIUM = BANCO_INTER;
+
 
     /**
      * Singleton <code>Map</code> para pesquisa por bancos suportados no
@@ -336,7 +343,7 @@ public enum BancosSuportados {
         suportados.put(BANCO_DO_ESTADO_DO_ESPIRITO_SANTO.codigoDeCompensacaoBACEN, BANCO_DO_ESTADO_DO_ESPIRITO_SANTO);
         suportados.put(BANCO_RURAL.codigoDeCompensacaoBACEN, BANCO_RURAL);
         suportados.put(BANCO_SANTANDER.codigoDeCompensacaoBACEN, BANCO_SANTANDER);
-        suportados.put(BANCO_INTEMEDIUM.codigoDeCompensacaoBACEN, BANCO_INTEMEDIUM);
+        suportados.put(BANCO_INTER.codigoDeCompensacaoBACEN, BANCO_INTER);
         suportados.put(BANCO_SICREDI.codigoDeCompensacaoBACEN, BANCO_SICREDI);
         suportados.put(BANCOOB.codigoDeCompensacaoBACEN, BANCOOB);
         suportados.put(CITIBANK.codigoDeCompensacaoBACEN, CITIBANK);

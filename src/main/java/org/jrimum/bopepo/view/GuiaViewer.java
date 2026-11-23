@@ -29,7 +29,7 @@
  */
 package org.jrimum.bopepo.view;
 
-import com.itextpdf.text.DocumentException;
+import com.lowagie.text.DocumentException;
 import org.jrimum.bopepo.Guia;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
 

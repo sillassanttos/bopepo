@@ -9,6 +9,7 @@ com os seguintes objetivos:
 
 - Unificado das bibliotecas do projeto JRimum (concluído)
 - Atualizar dependências: Java 11 e itextpdf5 (concluído)
+- Trocar o iText 5 (AGPL) pelo OpenPDF 1.4 (LGPL/MPL), que mantém o Java 11 (concluído no fork sillassanttos/bopepo)
 - Refatorar pacotes reduzindo a quantidade em unidades maiores e coesas (concluído)
 - Biblioteca pra gerar boletos, arquivos de remessa e retorno  (concluído)
 - Façade para facilitar o uso da biblioteca (concluído)
@@ -94,9 +95,9 @@ public class ExemploBoletoSimples {
 
     public static void main(String... args) {
         BoletoCobranca boleto = new BoletoCobranca();
-        boleto.sacado("Sacado da Silva Sauro").sacadoCpf("1");
+        boleto.sacado("Sacado da Silva Sauro").sacadoCpf("111.444.777-35");
         boleto.banco("1").agencia("1").conta("1");
-        boleto.cedente("Cedente da Silva Sauro").cedenteCnpj("1");
+        boleto.cedente("Cedente da Silva Sauro").cedenteCnpj("11.222.333/0001-81");
         boleto.carteira("1");
         boleto.numeroDocumento("1")
                 .nossoNumero("1234567890")
@@ -114,7 +115,7 @@ public class ExemploBoletoSimples {
 Exemplo de um boleto do Banco do brasil,
 convênio de cobrança 1234567 (7 posições), agência 8888-8, 
 carteira 17 (boleto registrado), 
-nosso número com 14 posições, 
+nosso número com 17 posições (convênio + 10 dígitos), 
 gerado pelo cedente no valor de R$ 100,23 e vencimento para 01/01/2019.:
 
 ```java
@@ -125,17 +126,17 @@ public class ExemploBoletoSimples {
 
     public static void main(String... args) {
         BoletoCobranca boleto = new BoletoCobranca();
-        boleto.sacado("Sacado da Silva Sauro").sacadoCpf("1");
+        boleto.sacado("Sacado da Silva Sauro").sacadoCpf("111.444.777-35");
         boleto.banco("1") //Banco do Brasil
             .agencia("8888-8")//Agência com digito
             .conta("1234567")//Código do convênio
             ;
-        boleto.cedente("Cedente da Silva Sauro").cedenteCnpj("1");
-        boleto.carteira("1");
+        boleto.cedente("Cedente da Silva Sauro").cedenteCnpj("11.222.333/0001-81");
+        boleto.carteira("17");
         boleto.numeroDocumento("1")//Número do documento (opcional)
-                //Nosso número com 14 posições verificar regra no manual do banco,
+                //Nosso número com 17 posições (convênio + 10), verificar regra no manual do banco,
                 // precisa ser único
-                .nossoNumero("12345670000001")
+                .nossoNumero("12345670000000001")
                 .valor(100.23).dataVencimento("01/01/2019");
 
         boleto.gerarLinhaDigitavel();

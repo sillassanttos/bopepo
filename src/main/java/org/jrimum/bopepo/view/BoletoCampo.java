@@ -73,6 +73,8 @@ public enum BoletoCampo {
 	txtFcNumeroDocumento,
 	txtFcOutraDeducao,
 	txtFcOutroAcrescimo,
+	/** QR Code Pix do boleto híbrido (Bolepix), à direita do código de barras. */
+	txtFcQrCodePix,
 	txtFcQuantidade,
 	txtFcSacadoL1,
 	txtFcSacadoL2,

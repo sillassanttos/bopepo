@@ -1,0 +1,35 @@
+{
+  "seuNumero": "PED-1001",
+  "valorNominal": 270.00,
+  "dataVencimento": "2024-08-07",
+  "numDiasAgenda": 30,
+  "pagador": {
+    "cpfCnpj": "11144477735",
+    "tipoPessoa": "FISICA",
+    "nome": "Pagador de Demonstração",
+    "endereco": "Rua de Demonstração",
+    "numero": "100",
+    "complemento": "Sala 1",
+    "bairro": "Centro",
+    "cidade": "Belo Horizonte",
+    "uf": "MG",
+    "cep": "30110000",
+    "email": "pagador@exemplo.invalido",
+    "ddd": "31",
+    "telefone": "999990000"
+  },
+  "desconto": { "codigo": "PERCENTUALDATAINFORMADA", "taxa": 3.00, "quantidadeDias": 5 },
+  "multa": { "codigo": "PERCENTUAL", "taxa": 2.00 },
+  "mora": { "codigo": "TAXAMENSAL", "taxa": 1.00 },
+  "mensagem": { "linha1": "Pedido PED-1001", "linha2": "Não receber após 30 dias do vencimento" },
+  "beneficiarioFinal": {
+    "cpfCnpj": "11222333000181",
+    "tipoPessoa": "JURIDICA",
+    "nome": "Empresa de Demonstração",
+    "endereco": "Avenida de Demonstração",
+    "cidade": "Belo Horizonte",
+    "uf": "MG",
+    "cep": "30110000"
+  },
+  "formasRecebimento": [ "BOLETO", "PIX" ]
+}

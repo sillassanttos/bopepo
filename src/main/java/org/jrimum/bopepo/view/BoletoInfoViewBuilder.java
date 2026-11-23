@@ -66,6 +66,8 @@ public class BoletoInfoViewBuilder {
 
     private final BoletoInfoCampoView boletoInfoCampo;
 
+    private final String pixCopiaECola;
+
     /**
      * Modo de instanciação não permitido.
      *
@@ -80,6 +82,7 @@ public class BoletoInfoViewBuilder {
         boletoTextosExtra = null;
         boletoImagensExtra = null;
         boletoInfoCampo = null;
+        pixCopiaECola = null;
     }
 
     public BoletoInfoViewBuilder(ResourceBundle resourceBundle, Boleto boleto) {
@@ -91,6 +94,7 @@ public class BoletoInfoViewBuilder {
         this.boletoTextosExtra = boleto.getTextosExtras();
         this.boletoImagensExtra = boleto.getImagensExtras();
         this.boletoInfoCampo = BoletoInfoCampoViewFactory.create(resourceBundle, boleto);
+        this.pixCopiaECola = boleto.getPixCopiaECola();
     }
 
     public Map<String, String> texts() {
@@ -137,6 +141,7 @@ public class BoletoInfoViewBuilder {
         setDataProcessamento();
         setSacadorAvalista();
         setCodigoDeBarras();
+        setQrCodePix();
         setCarteira();
         setTodosOsCamposTexto();
         setTodosOsCamposImagem();
@@ -282,6 +287,12 @@ public class BoletoInfoViewBuilder {
 
     private void setCodigoDeBarras() {
         image.put(BoletoCampo.txtFcCodigoBarra.name(), boletoInfoCampo.getImagemFcCodigoBarra());
+    }
+
+    private void setQrCodePix() {
+        if (isNotNull(pixCopiaECola)) {
+            image.put(BoletoCampo.txtFcQrCodePix.name(), QrCodePix.gerarImagem(pixCopiaECola));
+        }
     }
 
     private void setTodosOsCamposTexto() {

@@ -34,40 +34,31 @@ import org.jrimum.domkee.banco.Titulo;
 
 /**
  * <p>
- * Interface comum para todos os campos livres do Banco Intermedium que venham a
- * existir.
+ * Base dos campos livres do Banco Inter (077), antigo Banco Intermedium.
  * </p>
- * 
- * 
- * @author <a href="http://gilmatryx.googlepages.com/">Gilmar P.S.L</a>
- * @author <a href="mailto:lukas.antunes@virtualsistemas.com.br">Lukas
- *         Antunes</a>
- * 
+ *
+ * @see CLBancoInter
+ *
  * @since 0.2
- * 
- * @version 0.2
  */
-abstract class AbstractCLBancoIntermedium extends AbstractCampoLivre {
+abstract class AbstractCLBancoInter extends AbstractCampoLivre {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -8103863452995430046L;
 
 	/**
 	 * <p>Cria um campo livre com um determinado número de campos</p>
-	 * 
+	 *
 	 * @see AbstractCampoLivre
-	 * 
+	 *
 	 * @param fieldsLength - Número de campos
 	 */
-	protected AbstractCLBancoIntermedium(Integer fieldsLength) {
-		
+	protected AbstractCLBancoInter(Integer fieldsLength) {
+
 		super(fieldsLength);
 	}
 
-	protected static CampoLivre create(Titulo titulo){
-		
-		return new CLBancoIntermedium(titulo);
+	protected static CampoLivre create(Titulo titulo) {
+
+		return new CLBancoInter().build(titulo);
 	}
 }

@@ -339,7 +339,7 @@ public class BoletoCobranca extends Boleto {
             if (val instanceof Number) {
                 valor = (Number) val;
             } else {
-                parseInt(val.toString());
+                valor = parseInt(val.toString().trim());
             }
         }
         parametrosBancarios.adicione(parametroBancario, valor);

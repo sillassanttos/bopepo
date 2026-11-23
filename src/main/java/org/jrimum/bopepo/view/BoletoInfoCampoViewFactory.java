@@ -65,7 +65,7 @@ public class BoletoInfoCampoViewFactory {
 			// case BANCO_DO_ESTADO_DO_ESPIRITO_SANTO: return new ..;
 			// case BANCO_RURAL: return new ..;
 			// case BANCO_SANTANDER: return new ..;
-			// case BANCO_INTEMEDIUM: return nCew ..;
+			// case BANCO_INTER: return nCew ..;
 			 case BANCO_SICREDI: return new BoletoInfoViewSicredi(resourceBundle, boleto);
 			// case BANCOOB: return new ..;
 			// case CITIBANK: return new ..;

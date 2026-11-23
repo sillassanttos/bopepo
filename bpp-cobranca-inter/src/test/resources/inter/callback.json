@@ -1,0 +1,19 @@
+[
+  {
+    "codigoSolicitacao": "183e982a-34e5-4bc0-9643-def5432a1234",
+    "seuNumero": "PED-1001",
+    "situacao": "RECEBIDO",
+    "dataHoraSituacao": "2024-08-05T10:15:22-03:00",
+    "valorTotalRecebido": "270.00",
+    "origemRecebimento": "BOLETO",
+    "nossoNumero": "90021942001",
+    "codigoBarras": "07791980100000270000001112092125590021942001",
+    "linhaDigitavel": "07790001161209212559500219420015198010000027000"
+  },
+  {
+    "codigoSolicitacao": "aaaaaaaa-0000-0000-0000-000000000002",
+    "seuNumero": "PED-2",
+    "situacao": "CANCELADO",
+    "dataHoraSituacao": "2026-11-23T09:00:00-03:00"
+  }
+]
