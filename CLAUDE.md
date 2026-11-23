@@ -50,6 +50,16 @@
 - [x] Versões fixas: log4j 2.26.1 (era a faixa `[2.0.0,2.100)`), guava 33.8.0, commons-io 2.22.0, junit 4.13.2;
   compilador 3.14.0 com `release 11`.
 - [ ] JAXB `javax` → `jakarta` (afeta o pacote `texgit`; deixado para uma etapa própria).
-- [ ] Banco Inter: campo livre, CNAB 400 e cliente da API Cobrança v3.
+- [x] Banco Inter: campo livre (23/11/2026, branch `banco-inter-campo-livre`).
+  - Layout: agência (4) + carteira (3) + número da operação (7) + nosso número (10) + DV (módulo 10 sobre agência +
+    carteira + nosso número).
+  - O número da operação é o informado pelo Inter na contratação: `ParametroBancoInter.NUMERO_DA_OPERACAO`, que não é
+    a conta corrente.
+  - Referência: linha digitável de um boleto real (fórum do ACBr, tópico 79070), conferida em `TestBoletoBancoInter`.
+  - Enum `BANCO_INTER` (o `BANCO_INTEMEDIUM` ficou como sinônimo `@Deprecated`). Logo `077.png` neutro, só com texto.
+  - Pela fachada: `parametroBancario(ParametroBancoInter.NUMERO_DA_OPERACAO, "921255")`. O valor em texto era
+    descartado (bug antigo, corrigido). A fachada recusa zero à esquerda de propósito (`ConfiguracaoJRimum`).
+  - Resultado: **741 testes, 0 falhas, 6 ignorados**. PDF de exemplo em `local\validacao\boleto-inter-2026.pdf`.
+- [ ] Banco Inter: CNAB 400 e cliente da API Cobrança v3.
 - [ ] QR Code Pix (Bolepix) no PDF.
 - [ ] CI no GitHub Actions.

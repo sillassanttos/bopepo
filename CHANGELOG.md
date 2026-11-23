@@ -4,6 +4,16 @@ Bopepo Changelog
 2.0.2-SNAPSHOT (fork sillassanttos/bopepo)
 ----------------------------------------------------------------------
 
+**New Feature**
+
+ * Banco Inter (077): campo livre completo (agência + carteira + número da operação
+   + nosso número + DV módulo 10), conferido contra a linha digitável de um boleto
+   emitido pelo próprio banco. Novo parâmetro `ParametroBancoInter.NUMERO_DA_OPERACAO`
+   e utilitário público `NossoNumeroBancoInter` (cálculo e conferência do dígito).
+   O dígito ausente é calculado; o dígito errado é recusado.
+ * `BancosSuportados.BANCO_INTER` ("BANCO INTER S.A."); `BANCO_INTEMEDIUM` continua
+   como sinônimo `@Deprecated`. Logo `077.png` trocado por um neutro, só com texto.
+
 **Improvement**
 
  * Geração de PDF com o OpenPDF 1.4.2 (LGPL/MPL) no lugar do iText 5.5 (AGPL),
@@ -19,6 +29,8 @@ Bopepo Changelog
  * Gerador de nosso número aleatório dos testes de campo livre completava sem zeros
    à esquerda e deixava um teste do Bancoob instável.
  * Exemplos do README que não rodavam (CPF/CNPJ inválidos, nosso número do BB).
+ * `BoletoCobranca.parametroBancario` descartava o valor quando ele vinha como texto
+   (o parâmetro ficava nulo).
 
 
 0.2.3 (2014/02/01) main release GitHub
