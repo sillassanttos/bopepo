@@ -28,13 +28,13 @@
  */
 package org.jrimum.bopepo.view;
 
-import com.itextpdf.text.DocumentException;
-import com.itextpdf.text.Image;
-import com.itextpdf.text.pdf.AcroFields;
-import com.itextpdf.text.pdf.BarcodeInter25;
-import com.itextpdf.text.pdf.PdfContentByte;
-import com.itextpdf.text.pdf.PdfReader;
-import com.itextpdf.text.pdf.PdfStamper;
+import com.lowagie.text.DocumentException;
+import com.lowagie.text.Image;
+import com.lowagie.text.pdf.AcroFields;
+import com.lowagie.text.pdf.BarcodeInter25;
+import com.lowagie.text.pdf.PdfContentByte;
+import com.lowagie.text.pdf.PdfReader;
+import com.lowagie.text.pdf.PdfStamper;
 import org.jrimum.bopepo.Guia;
 
 import java.io.ByteArrayOutputStream;
@@ -517,11 +517,11 @@ class ViewerPDF {
         PdfContentByte cb = null;
 
         // Verifcando se existe o field(campo) da imagem no template do boleto.
-        List<AcroFields.FieldPosition> posCampoImgLogo = form.getFieldPositions("txtCodigoBarra");
+        List<float[]> posCampoImgLogo = PDFUtil.posicoesDoCampo(form, "txtCodigoBarra");
 
         if (isNotNull(posCampoImgLogo)) {
-            for (AcroFields.FieldPosition pos : posCampoImgLogo) {
-                RectanglePDF field = new RectanglePDF(pos.position);
+            for (float[] pos : posCampoImgLogo) {
+                RectanglePDF field = new RectanglePDF(pos);
                 cb = stamper.getOverContent(field.getPage());
                 Image imgBarCode = barCode.createImageWithBarcode(cb, null, null);
                 PDFUtil.changeField2Image(stamper, field, imgBarCode);
@@ -703,11 +703,11 @@ class ViewerPDF {
 
         if (StringUtils.isNotBlank(nomeDoCampo)) {
 
-            List<AcroFields.FieldPosition> posCampoImgLogo = form.getFieldPositions(nomeDoCampo);
+            List<float[]> posCampoImgLogo = PDFUtil.posicoesDoCampo(form, nomeDoCampo);
 
             if (isNotNull(posCampoImgLogo)) {
-                for (AcroFields.FieldPosition fpos : posCampoImgLogo) {
-                    PDFUtil.changeField2Image(stamper, new RectanglePDF(fpos.position), imagem);
+                for (float[] fpos : posCampoImgLogo) {
+                    PDFUtil.changeField2Image(stamper, new RectanglePDF(fpos), imagem);
                 }
             }
         }

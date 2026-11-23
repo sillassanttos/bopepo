@@ -28,8 +28,8 @@
  */
 package org.jrimum.bopepo.pdf;
 
-import com.itextpdf.text.pdf.AcroFields;
-import com.itextpdf.text.pdf.PdfReader;
+import com.lowagie.text.pdf.AcroFields;
+import com.lowagie.text.pdf.PdfReader;
 import static org.jrimum.utilix.Collections.hasElement;
 
 import java.io.File;
@@ -236,7 +236,7 @@ public class PdfDocReader {
      */
     @SuppressWarnings("unchecked")
     public Collection<String> getFieldsNames() {
-        return form.getFields().keySet();
+        return form.getAllFields().keySet();
     }
 
     /**
