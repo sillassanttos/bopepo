@@ -1,0 +1,20 @@
+{
+  "totalPaginas": 2,
+  "totalElementos": 3,
+  "tamanhoPagina": 2,
+  "primeiraPagina": false,
+  "ultimaPagina": true,
+  "numeroDeElementos": 1,
+  "cobrancas": [
+    {
+      "cobranca": {
+        "codigoSolicitacao": "aaaaaaaa-0000-0000-0000-000000000003",
+        "seuNumero": "PED-3",
+        "situacao": "SITUACAO_QUE_AINDA_NAO_EXISTE",
+        "dataVencimento": "2026-12-20",
+        "valorNominal": "10.00",
+        "pagador": { "nome": "Pagador de Demonstração", "cpfCnpj": "11144477735" }
+      }
+    }
+  ]
+}

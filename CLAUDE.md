@@ -60,6 +60,19 @@
   - Pela fachada: `parametroBancario(ParametroBancoInter.NUMERO_DA_OPERACAO, "921255")`. O valor em texto era
     descartado (bug antigo, corrigido). A fachada recusa zero à esquerda de propósito (`ConfiguracaoJRimum`).
   - Resultado: **741 testes, 0 falhas, 6 ignorados**. PDF de exemplo em `local\validacao\boleto-inter-2026.pdf`.
-- [ ] Banco Inter: CNAB 400 e cliente da API Cobrança v3.
-- [ ] QR Code Pix (Bolepix) no PDF.
+- [x] Banco Inter: cliente da API Cobrança v3 (23/11/2026, branch `banco-inter-api`).
+  - Fica em `bpp-cobranca-inter\`, projeto Maven próprio que depende do `bpp-cobranca` (decisão do usuário: quem não
+    usa o Inter não carrega Jackson). Compile com `mvn -B install` na raiz e depois `mvn -B test` na subpasta.
+  - Contrato tirado da especificação OpenAPI oficial do portal developers.inter.co (arquivos
+    `redocusaurus/swagger-cobranca-bolepix-yaml.yaml` e `swagger-token-yaml.yaml`, lidos em 23/11/2026).
+  - Dependência nova: só `jackson-databind` 2.21.7. HTTP com `java.net.http`, mTLS com o certificado PEM ou PKCS#12.
+  - Testes sem rede (respostas gravadas): **53 testes, 0 falhas, 1 ignorado**. O ignorado é o teste no sandbox (`TestIntegracaoSandboxInter`)
+    e só roda com as variáveis `INTER_SANDBOX_*`; ainda não rodou, por falta de credenciais.
+- [ ] Banco Inter: CNAB 400.
+- [x] QR Code Pix (Bolepix) no PDF (23/11/2026, branch `banco-inter-api`).
+  - `Boleto.setPixCopiaECola(texto)`. O QR é gerado com o ZXing 3.5.4 (Apache 2.0), porque o OpenPDF 1.4 não gera QR.
+  - Campo novo `txtFcQrCodePix` (66 x 66 pt) nos dois templates de boleto, à direita do código de barras: x=345, y=27
+    (sem sacador avalista) e y=19 (com sacador avalista). Foi acrescentado no PDF por programa
+    (`local\AdicionarCampoQrPix.java`); os `.odt` de origem não têm o campo.
+  - Núcleo: **744 testes, 0 falhas, 6 ignorados**. O QR dentro do PDF foi lido de volta com o texto exato.
 - [ ] CI no GitHub Actions.

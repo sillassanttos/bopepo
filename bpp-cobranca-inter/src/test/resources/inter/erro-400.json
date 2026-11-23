@@ -1,0 +1,9 @@
+{
+  "title": "Dados inválidos.",
+  "detail": "Verifique se os dados informados estão de acordo com a documentação disponibilizada e tente novamente.",
+  "timestamp": "2026-11-23T18:06:11.692931-03:00",
+  "violacoes": [
+    { "razao": "deve ser maior ou igual a 2.5", "propriedade": "valorNominal", "valor": "1.00" },
+    { "razao": "CEP inválido", "propriedade": "pagador.cep" }
+  ]
+}

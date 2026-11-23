@@ -1,0 +1,41 @@
+{
+  "totalPaginas": 2,
+  "totalElementos": 3,
+  "tamanhoPagina": 2,
+  "primeiraPagina": true,
+  "ultimaPagina": false,
+  "numeroDeElementos": 2,
+  "cobrancas": [
+    {
+      "cobranca": {
+        "codigoSolicitacao": "aaaaaaaa-0000-0000-0000-000000000001",
+        "seuNumero": "PED-1",
+        "situacao": "A_RECEBER",
+        "dataEmissao": "2026-11-20",
+        "dataVencimento": "2026-12-15",
+        "valorNominal": "123.45",
+        "tipoCobranca": "SIMPLES",
+        "pagador": { "nome": "Pagador de Demonstração", "cpfCnpj": "11144477735" }
+      },
+      "boleto": {
+        "nossoNumero": "00000000010",
+        "codigoBarras": "07798166100000123450001112123456700000000010",
+        "linhaDigitavel": "07790001161212345670400000000010881660000012345"
+      }
+    },
+    {
+      "cobranca": {
+        "codigoSolicitacao": "aaaaaaaa-0000-0000-0000-000000000002",
+        "seuNumero": "PED-2",
+        "situacao": "RECEBIDO",
+        "dataEmissao": "2026-11-20",
+        "dataVencimento": "2026-12-15",
+        "valorNominal": "50.00",
+        "valorTotalRecebido": "50.00",
+        "origemRecebimento": "PIX",
+        "tipoCobranca": "SIMPLES",
+        "pagador": { "nome": "Empresa de Demonstração", "cpfCnpj": "11222333000181" }
+      }
+    }
+  ]
+}

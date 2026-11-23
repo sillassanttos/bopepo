@@ -544,6 +544,35 @@ public class Boleto {
         getImagensExtras().put(campo, conteudo);
     }
 
+    /**
+     * Texto do QR Code Pix (BR Code, o "Pix copia e cola") do boleto híbrido.
+     */
+    private String pixCopiaECola;
+
+    /**
+     * @return Texto do QR Code Pix (BR Code), ou {@code null} se o boleto não
+     * tiver Pix.
+     *
+     * @since 2.0.2
+     */
+    public String getPixCopiaECola() {
+        return pixCopiaECola;
+    }
+
+    /**
+     * Define o Pix do boleto híbrido (Bolepix). O texto é o BR Code devolvido
+     * pelo banco (o "Pix copia e cola"); no PDF, ele vira um QR Code no campo
+     * {@link BoletoCampo#txtFcQrCodePix} do template, à direita do código de
+     * barras.
+     *
+     * @param pixCopiaECola texto do BR Code; {@code null} ou vazio tira o Pix
+     *
+     * @since 2.0.2
+     */
+    public void setPixCopiaECola(String pixCopiaECola) {
+        this.pixCopiaECola = pixCopiaECola == null || pixCopiaECola.trim().isEmpty() ? null : pixCopiaECola.trim();
+    }
+
     @Override
     public String toString() {
         return Objects.toString(this);

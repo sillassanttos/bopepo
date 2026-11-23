@@ -1,0 +1,12 @@
+{
+  "cobranca": {
+    "codigoSolicitacao": "183e982a-34e5-4bc0-9643-def5432a1234",
+    "seuNumero": "PED-1001",
+    "dataEmissao": "2024-08-01",
+    "dataVencimento": "2024-08-07",
+    "valorNominal": 270.00,
+    "tipoCobranca": "SIMPLES",
+    "situacao": "EM_PROCESSAMENTO",
+    "pagador": { "cpfCnpj": "11144477735", "tipoPessoa": "FISICA", "nome": "Pagador de Demonstração" }
+  }
+}

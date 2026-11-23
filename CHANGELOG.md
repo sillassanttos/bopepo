@@ -6,6 +6,13 @@ Bopepo Changelog
 
 **New Feature**
 
+ * Novo artefato `bpp-cobranca-inter` (pasta própria): cliente da API Cobrança v3
+   (boleto com Pix) do Banco Inter, com mTLS, token em cache, emissão assíncrona com
+   espera, consulta, pesquisa paginada, cancelamento, PDF do banco, webhook e
+   simulação de pagamento no sandbox. `BoletoInter` monta o boleto do Bopepo a partir
+   da resposta do banco e confere o código de barras.
+ * Boleto híbrido (Bolepix): `Boleto.setPixCopiaECola` imprime o QR Code Pix à
+   direita do código de barras (campo `txtFcQrCodePix` nos templates; ZXing 3.5.4).
  * Banco Inter (077): campo livre completo (agência + carteira + número da operação
    + nosso número + DV módulo 10), conferido contra a linha digitável de um boleto
    emitido pelo próprio banco. Novo parâmetro `ParametroBancoInter.NUMERO_DA_OPERACAO`

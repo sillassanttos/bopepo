@@ -252,6 +252,12 @@
             <artifactId>openpdf</artifactId>
             <version>1.4.2</version>
         </dependency>
+        <dependency>
+            <!-- QR Code do Pix no boleto híbrido (Bolepix). Apache 2.0; o OpenPDF 1.4 não gera QR Code. -->
+            <groupId>com.google.zxing</groupId>
+            <artifactId>core</artifactId>
+            <version>3.5.4</version>
+        </dependency>
         <!--java 11 removed-->
         <dependency>
             <groupId>javax.xml.bind</groupId>

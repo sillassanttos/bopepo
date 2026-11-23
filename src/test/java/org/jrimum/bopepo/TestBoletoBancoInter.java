@@ -12,12 +12,18 @@
 package org.jrimum.bopepo;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
+import java.awt.image.BufferedImage;
 import java.math.BigDecimal;
+import java.util.Collection;
+import java.util.Map;
 
 import com.github.braully.boleto.BoletoCobranca;
 
+import org.jrimum.bopepo.excludes.PDFs;
 import org.jrimum.bopepo.parametro.ParametroBancoInter;
+import org.jrimum.bopepo.view.BoletoViewer;
 import org.jrimum.domkee.banco.Agencia;
 import org.jrimum.domkee.banco.Carteira;
 import org.jrimum.domkee.banco.Cedente;
@@ -99,5 +105,20 @@ public class TestBoletoBancoInter {
 		boleto.sacado("Pagador de Demonstração").cedente("Beneficiário de Demonstração");
 
 		assertEquals(LINHA_DO_BANCO, boleto.getLinhaDigitavel().write().replaceAll("[ .]", ""));
+	}
+
+	@Test
+	public void sePdfComPixTrazOQrCodeAlemDoLogoEDoCodigoDeBarras() throws Exception {
+
+		Boleto semPix = new Boleto(titulo);
+		Map<String, Collection<BufferedImage>> imagensSemPix = PDFs.getImages(new BoletoViewer(semPix).getPdfAsByteArray());
+
+		Boleto comPix = new Boleto(titulo);
+		comPix.setPixCopiaECola("00020101021226870014br.gov.bcb.pix2565qrcode.exemplo.invalido/pix/v2/cobv/demo"
+				+ "5204000053039865406270.005802BR5925BENEFICIARIO DE DEMONSTRA6014BELO HORIZONTE62070503***6304ABCD");
+		Map<String, Collection<BufferedImage>> imagensComPix = PDFs.getImages(new BoletoViewer(comPix).getPdfAsByteArray());
+
+		assertEquals(imagensSemPix.size() + 1, imagensComPix.size());
+		assertTrue("sem Pix, o PDF não deve ter QR Code", imagensSemPix.size() >= 2);
 	}
 }
