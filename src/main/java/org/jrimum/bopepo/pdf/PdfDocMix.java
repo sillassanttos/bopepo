@@ -28,13 +28,13 @@
  */
 package org.jrimum.bopepo.pdf;
 
-import com.itextpdf.text.DocumentException;
-import com.itextpdf.text.Image;
-import com.itextpdf.text.pdf.AcroFields;
-import com.itextpdf.text.pdf.PdfBoolean;
-import com.itextpdf.text.pdf.PdfName;
-import com.itextpdf.text.pdf.PdfReader;
-import com.itextpdf.text.pdf.PdfStamper;
+import com.lowagie.text.DocumentException;
+import com.lowagie.text.Image;
+import com.lowagie.text.pdf.AcroFields;
+import com.lowagie.text.pdf.PdfBoolean;
+import com.lowagie.text.pdf.PdfName;
+import com.lowagie.text.pdf.PdfReader;
+import com.lowagie.text.pdf.PdfStamper;
 import static org.apache.commons.lang3.StringUtils.isBlank;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
 import static org.jrimum.utilix.Collections.hasElement;
@@ -59,6 +59,7 @@ import org.apache.log4j.Logger;
 import org.jrimum.utilix.Collections;
 import org.jrimum.utilix.Exceptions;
 import org.jrimum.utilix.Objects;
+import org.jrimum.utilix.PDFUtil;
 import org.jrimum.utilix.Strings;
 
 /**
@@ -956,7 +957,7 @@ public class PdfDocMix {
             if (isNull(docInfo.creation())) {
                 docInfo.creation(Calendar.getInstance());
             }
-            stamper.setMoreInfo((Map<String, String>) (HashMap<?, ?>) docInfo.toMap());
+            stamper.setInfoDictionary((Map<String, String>) (HashMap<?, ?>) docInfo.toMap());
             if (isNotNull(displayDocTitle)) {
                 stamper.addViewerPreference(PdfName.DISPLAYDOCTITLE, displayDocTitle ? PdfBoolean.PDFTRUE : PdfBoolean.PDFFALSE);
             }
@@ -1022,11 +1023,11 @@ public class PdfDocMix {
      */
     private void setImage(String fieldName, java.awt.Image image) {
         if (isNotBlank(fieldName)) {
-            List<AcroFields.FieldPosition> posImgField = form.getFieldPositions(fieldName);
-            if (isNotNull(posImgField)) {
+            List<float[]> posImgField = PDFUtil.posicoesDoCampo(form, fieldName);
+            if (!posImgField.isEmpty()) {
                 try {
-                    for (AcroFields.FieldPosition pos : posImgField) {
-                        PDFs.changeFieldToImage(stamper, new PdfRectangle(pos.position), getPdfImage(image));
+                    for (float[] pos : posImgField) {
+                        PDFs.changeFieldToImage(stamper, new PdfRectangle(pos), getPdfImage(image));
                     }
                 } catch (Exception e) {
                     e.printStackTrace();

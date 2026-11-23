@@ -36,6 +36,8 @@ import java.lang.reflect.ParameterizedType;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
+import org.apache.commons.lang3.StringUtils;
+
 import org.jrimum.domkee.banco.ParametroBancario;
 import org.jrimum.domkee.banco.ParametrosBancariosMap;
 import org.jrimum.domkee.banco.Agencia;
@@ -426,8 +428,11 @@ public abstract class AbstractCampoLivreBaseTest<CL extends CampoLivre> {
      */
     private final String nossoNumeroRadom(int nnLength) {
 
-        //Nosso número randômico
-        return new BigDecimal(Math.random()).movePointRight(nnLength).setScale(0, RoundingMode.DOWN).toString();
+        //Nosso número randômico, completado com zeros à esquerda: sem isso, um
+        //Math.random() menor que 0,1 gerava um número com menos dígitos que
+        //nnLength e deixava os testes de tamanho instáveis.
+        String nn = new BigDecimal(Math.random()).movePointRight(nnLength).setScale(0, RoundingMode.DOWN).toString();
+        return StringUtils.leftPad(nn, nnLength, '0');
     }
 
 }

@@ -29,21 +29,25 @@
  */
 package org.jrimum.utilix;
 
-import com.itextpdf.text.Document;
-import com.itextpdf.text.DocumentException;
-import com.itextpdf.text.Image;
-import com.itextpdf.text.pdf.PdfCopy;
-import com.itextpdf.text.pdf.PdfImportedPage;
-import com.itextpdf.text.pdf.PdfReader;
-import com.itextpdf.text.pdf.PdfStamper;
-import com.itextpdf.text.pdf.SimpleBookmark;
+import com.lowagie.text.Document;
+import com.lowagie.text.DocumentException;
+import com.lowagie.text.Image;
+import com.lowagie.text.pdf.PdfCopy;
+import com.lowagie.text.pdf.PdfImportedPage;
+import com.lowagie.text.pdf.PdfReader;
+import com.lowagie.text.pdf.PdfStamper;
+import com.lowagie.text.pdf.SimpleBookmark;
 import static org.jrimum.utilix.ObjectUtil.isNotNull;
 
 import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.log4j.Logger;
+
+import com.lowagie.text.pdf.AcroFields;
 
 /**
  *
@@ -73,6 +77,45 @@ public class PDFUtil {
     private static final long serialVersionUID = 1L;
 
     protected static final Logger LOG = Logger.getLogger(PDFUtil.class);
+
+    /**
+     * Quantidade de valores que o OpenPDF usa para descrever cada ocorrência de
+     * um campo: [página, llx, lly, urx, ury].
+     */
+    private static final int VALORES_POR_POSICAO = 5;
+
+    /**
+     * Retorna as posições de todas as ocorrências de um campo do formulário,
+     * cada uma no formato [página, llx, lly, urx, ury] aceito pelos construtores
+     * de {@link RectanglePDF} e {@link org.jrimum.bopepo.pdf.PdfRectangle}.
+     * <p>
+     * O OpenPDF devolve todas as ocorrências num único array; o iText 5
+     * devolvia uma lista de {@code FieldPosition}. Este método isola essa
+     * diferença.
+     * </p>
+     *
+     * @param form formulário do PDF
+     * @param nomeDoCampo nome do campo
+     * @return lista de posições; vazia se o campo não existir
+     */
+    public static List<float[]> posicoesDoCampo(AcroFields form, String nomeDoCampo) {
+
+        float[] valores = form.getFieldPositions(nomeDoCampo);
+
+        if (valores == null || valores.length < VALORES_POR_POSICAO) {
+            return Collections.emptyList();
+        }
+
+        List<float[]> posicoes = new ArrayList<>(valores.length / VALORES_POR_POSICAO);
+
+        for (int i = 0; i + VALORES_POR_POSICAO <= valores.length; i += VALORES_POR_POSICAO) {
+            float[] posicao = new float[VALORES_POR_POSICAO];
+            System.arraycopy(valores, i, posicao, 0, VALORES_POR_POSICAO);
+            posicoes.add(posicao);
+        }
+
+        return posicoes;
+    }
 
     public static RectanglePDF changeField2Image(PdfStamper stamper, float[] positions, Image image) throws DocumentException {
 
@@ -149,11 +192,11 @@ public class PDFUtil {
 
                         // pega-se o numero total de paginas
                         int n = reader.getNumberOfPages();
-                        List bookmarks = SimpleBookmark.getBookmark(reader);
+                        List<Map<String, Object>> bookmarks = SimpleBookmark.getBookmarkList(reader);
 
                         if (isNotNull(bookmarks)) {
                             if (pageOffset != 0) {
-                                SimpleBookmark.shiftPageNumbers(bookmarks,
+                                SimpleBookmark.shiftPageNumbersInRange(bookmarks,
                                         pageOffset, null);
                             }
                             master.addAll(bookmarks);

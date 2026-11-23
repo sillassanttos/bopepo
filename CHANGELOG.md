@@ -1,6 +1,38 @@
 Bopepo Changelog
 ====================================================
 
+2.0.2-SNAPSHOT (fork sillassanttos/bopepo)
+----------------------------------------------------------------------
+
+**New Feature**
+
+ * Banco Inter (077): campo livre completo (agência + carteira + número da operação
+   + nosso número + DV módulo 10), conferido contra a linha digitável de um boleto
+   emitido pelo próprio banco. Novo parâmetro `ParametroBancoInter.NUMERO_DA_OPERACAO`
+   e utilitário público `NossoNumeroBancoInter` (cálculo e conferência do dígito).
+   O dígito ausente é calculado; o dígito errado é recusado.
+ * `BancosSuportados.BANCO_INTER` ("BANCO INTER S.A."); `BANCO_INTEMEDIUM` continua
+   como sinônimo `@Deprecated`. Logo `077.png` trocado por um neutro, só com texto.
+
+**Improvement**
+
+ * Geração de PDF com o OpenPDF 1.4.2 (LGPL/MPL) no lugar do iText 5.5 (AGPL),
+   permitindo o uso da biblioteca em sistemas de código fechado.
+ * Versões fixas de dependências: log4j 2.26.1 (antes, faixa [2.0.0,2.100)),
+   guava 33.8.0, commons-io 2.22.0, junit 4.13.2 (testes).
+ * Compilação com `release 11`, para garantir só a API do Java 11 mesmo em JDK mais novo.
+
+**Fix**
+
+ * Testes de imagens do PDF (logos e código de barras) reescritos para o OpenPDF
+   e reativados; estavam desligados desde a troca para o iText 5.
+ * Gerador de nosso número aleatório dos testes de campo livre completava sem zeros
+   à esquerda e deixava um teste do Bancoob instável.
+ * Exemplos do README que não rodavam (CPF/CNPJ inválidos, nosso número do BB).
+ * `BoletoCobranca.parametroBancario` descartava o valor quando ele vinha como texto
+   (o parâmetro ficava nulo).
+
+
 0.2.3 (2014/02/01) main release GitHub
 ----------------------------------------------------------------------
 

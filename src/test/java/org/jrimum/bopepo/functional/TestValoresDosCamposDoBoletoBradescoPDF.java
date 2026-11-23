@@ -69,9 +69,6 @@ public class TestValoresDosCamposDoBoletoBradescoPDF {
      *
      * @throws IOException
      */
-    @Ignore//TODO: Braully-- Erro depois da atualizar o itext
-    //http://itext.2136553.n4.nabble.com/Reading-text-from-PDF-td2528925.html
-    //FIXME: Corrigir futuramente
     @Test
     public void deve_gerar_boleto_com_apenas_duas_imagens() throws IOException {
         BoletoViewer boletoViewer = BoletoViewer
@@ -83,7 +80,6 @@ public class TestValoresDosCamposDoBoletoBradescoPDF {
 
     }
 
-    @Ignore
     @Test
     public void deve_gerar_boleto_com_duas_logos_do_banco() throws IOException {
         BoletoViewer boletoViewer = BoletoViewer
@@ -103,7 +99,6 @@ public class TestValoresDosCamposDoBoletoBradescoPDF {
         assertTrue(Images.areEqual(logo1Boleto, logo2Boleto));
     }
 
-    @Ignore
     @Test
     public void deve_gerar_boleto_com_codigo_de_barras() throws IOException {
         BoletoViewer boletoViewer = BoletoViewer
